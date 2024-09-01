@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { Button, Layout, Typography } from 'antd';
+import {Button, Layout, notification, Typography} from 'antd';
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -8,7 +8,19 @@ const App = () => {
     const [count, setCount] = useState(0);
 
     const increment = () => setCount(count + 1);
-    const decrement = () => setCount(count - 1);
+
+    const decrement = () => {
+        if (count === 0) {
+            // Если счетчик равен 0, показать уведомление
+            notification.warning({
+                message: 'Предупреждение',
+                description: 'Счетчик не может быть меньше 0.',
+                placement: 'topRight',
+            });
+        } else {
+            setCount(count - 1);
+        }
+    };
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
