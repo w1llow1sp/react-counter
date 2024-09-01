@@ -7,7 +7,18 @@ const { Title } = Typography;
 const App = () => {
     const [count, setCount] = useState(0);
 
-    const increment = () => setCount(count + 1);
+    const increment = () => {
+        if (count === 10) {
+            // Если счетчик равен 10, показать уведомление
+            notification.warning({
+                message: 'Предупреждение',
+                description: 'Счетчик не может быть больше 10.',
+                placement: 'topRight',
+            });
+        } else {
+            setCount(count + 1);
+        }
+    };
 
     const decrement = () => {
         if (count === 0) {
